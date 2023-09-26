@@ -1,0 +1,24 @@
+{
+  "name": "binary-search-tree",
+  "version": "1.0.0",
+  "description": "Binary Search Tree",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DWYLau/binary-search-tree.git"
+  },
+  "keywords": [],
+  "author": "Derek Lau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DWYLau/binary-search-tree/issues"
+  },
+  "homepage": "https://github.com/DWYLau/binary-search-tree#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "code-runner.runInTerminal": "true"
+}

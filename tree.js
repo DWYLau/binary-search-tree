@@ -14,11 +14,28 @@ class Tree {
       let mid = Math.floor(sorted.length / 2);
       let left = sorted.slice(0, mid);
       let right = sorted.slice(mid + 1);
-      let rootNode = new Node(sorted[mid]);
-      rootNode.left = this.buildTree(left);
-      rootNode.right = this.buildTree(right);
-      return rootNode;
+      let root = new Node(sorted[mid]);
+      root.left = this.buildTree(left);
+      root.right = this.buildTree(right);
+      return root;
     }
+  }
+
+  insert(value) {
+    this.root = this.insertNode(this.root, value);
+  }
+
+  insertNode(root, value) {
+    if (root == null) {
+      root = new Node(value);
+      return root;
+    }
+    if (value < root.value) {
+      root.left = this.insertNode(root.left, value);
+    } else if (value > root.value) {
+      root.right = this.insertNode(root.right, value);
+    }
+    return root;
   }
 }
 

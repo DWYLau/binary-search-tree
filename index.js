@@ -13,9 +13,7 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
   }
 };
 
-let tree = new Tree();
-tree.insert(3);
-tree.insert(1);
-tree.insert(2);
-tree.insert(4);
+let tree = new Tree([10, 20, 30, 40, 50]);
+prettyPrint(tree.root);
+tree.delete(30);
 prettyPrint(tree.root);

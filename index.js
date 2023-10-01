@@ -12,8 +12,3 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 };
-
-let tree = new Tree([10, 20, 30, 40, 50]);
-prettyPrint(tree.root);
-tree.delete(30);
-prettyPrint(tree.root);

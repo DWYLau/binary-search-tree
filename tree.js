@@ -85,12 +85,22 @@ class Tree {
       return this.findSucc(node.left);
     }
   }
+
+  find(value) {
+    return this.findNode(this.root, value);
+  }
+
+  findNode(node, value) {
+    if (node === null) {
+      return node;
+    }
+    if (node.value === value) {
+      return node;
+    } else if (node.value > value) {
+      return this.findNode(node.left, value);
+    } else {
+      return this.findNode(node.right, value);
+    }
+  }
 }
-
-let tree = new Tree();
-tree.insert(10);
-tree.insert(20);
-tree.insert(30);
-tree.insert(40);
-
 module.exports = Tree;

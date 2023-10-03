@@ -12,3 +12,6 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 };
+
+let tree = new Tree([3, 1, 2, 4]);
+console.log(typeof tree.find(3));

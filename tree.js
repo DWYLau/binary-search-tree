@@ -91,9 +91,7 @@ class Tree {
   }
 
   findNode(node, value) {
-    if (node === null) {
-      return node;
-    }
+    if (node === null) return node;
     if (node.value === value) {
       return node;
     } else if (node.value > value) {
@@ -105,50 +103,67 @@ class Tree {
 
   levelOrder(callback, traversal = []) {
     let node = this.root;
-    if (node === null) {
-      return node;
-    }
+    if (node === null) return node;
     let queue = [];
     queue.push(node);
     while (queue.length) {
       let currentNode = queue[0];
       traversal.push(currentNode.value);
-      if (currentNode.left != null) {
-        queue.push(currentNode.left);
-      }
-      if (currentNode.right != null) {
-        queue.push(currentNode.right);
-      }
+      if (currentNode.left != null) queue.push(currentNode.left);
+      if (currentNode.right != null) queue.push(currentNode.right);
       queue.shift();
     }
-    if (callback) {
-      return callback;
-    }
+    if (callback) return callback;
+
     return traversal;
   }
 
   preorder(callback, traversal = []) {
     let node = this.root;
-    if (node === null) {
-      return node;
-    }
+    if (node === null) return node;
     const stack = [node];
     while (stack.length) {
       let currentNode = stack.pop();
-      if (currentNode.right != null) {
-        stack.push(currentNode.right);
-      }
-      if (currentNode.left != null) {
-        stack.push(currentNode.left);
-      }
-      if (callback) {
-        callback(currentNode);
-      }
+      if (currentNode.right != null) stack.push(currentNode.right);
+      if (currentNode.left != null) stack.push(currentNode.left);
+      if (callback) callback(currentNode);
       traversal.push(currentNode.value);
     }
-    if (callback) {
-      return callback;
+    if (callback) return callback;
+    return traversal;
+  }
+
+  postorder(callback, traversal = []) {
+    let node = this.root;
+    if (node === null) return node;
+    const stack = [node];
+    while (stack.length) {
+      let currentNode = stack.pop();
+      if (currentNode.left != null) stack.push(currentNode.left);
+      if (currentNode.right != null) stack.push(currentNode.right);
+      if (callback) callback(currentNode);
+      traversal.push(currentNode.value);
     }
+    if (callback) return callback;
+    return traversal.reverse();
+  }
+
+  inorder(callback, traversal = []) {
+    let node = this.root;
+    if (node === null) return node;
+    const stack = [];
+    while (node !== null || stack.length > 0) {
+      if (node !== null) {
+        stack.push(node);
+        node = node.left;
+      } else {
+        node = stack.pop();
+        if (callback) return callback;
+        traversal.push(node.value);
+        node = node.right;
+      }
+    }
+    if (callback) return callback;
     return traversal;
   }
 }

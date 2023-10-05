@@ -166,6 +166,51 @@ class Tree {
     if (callback) return callback;
     return traversal;
   }
+
+  height(value) {
+    return this.findHeight(this.root, value);
+  }
+
+  findHeight(node, value) {
+    if (node === null) return node;
+    let height = -1;
+    let level = 0;
+    const queue = [node];
+    while (queue.length > 0) {
+      const n = queue.length;
+      for (let i = 0; i < n; i++) {
+        const current = queue.shift();
+        if (current.value === value) height = level;
+        if (current.left !== null) queue.push(current.left);
+        if (current.right !== null) queue.push(current.right);
+      }
+      level++;
+    }
+    height = level - height - 1;
+    return height;
+  }
+
+  depth(value) {
+    return this.findDepth(this.root, value);
+  }
+
+  findDepth(node, value) {
+    if (node === null) return node;
+    let depth = -1;
+    let level = 0;
+    const queue = [node];
+    while (queue.length > 0) {
+      const n = queue.length;
+      for (let i = 0; i < n; i++) {
+        const current = queue.shift();
+        if (current.value === value) depth = level;
+        if (current.left !== null) queue.push(current.left);
+        if (current.right !== null) queue.push(current.right);
+      }
+      level++;
+    }
+    return depth;
+  }
 }
 
 module.exports = Tree;

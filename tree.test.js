@@ -97,4 +97,40 @@ describe("#find", () => {
     expect(typeof tree.find(3)).toBe("object");
     expect(typeof tree.find(1)).toBe("object");
   });
+
+  describe("#height", () => {
+    test("returns 0 if node is leaf node", () => {
+      let tree = new Tree([3, 1, 2, 4, 6, 5]);
+
+      expect(tree.height(1)).toBe(0);
+      expect(tree.height(3)).toBe(0);
+      expect(tree.height(5)).toBe(0);
+    });
+
+    test("returns height value if node is higher than leaf node", () => {
+      let tree = new Tree([3, 1, 2, 4, 6, 5]);
+
+      expect(tree.height(4)).toBe(2);
+      expect(tree.height(2)).toBe(1);
+      expect(tree.height(6)).toBe(1);
+    });
+  });
+
+  describe("#depth", () => {
+    test("returns 0 if node is root node", () => {
+      let tree = new Tree([3, 1, 2, 4, 6, 5]);
+
+      expect(tree.depth(4)).toBe(0);
+    });
+
+    test("returns depth value if node is lower than root node", () => {
+      let tree = new Tree([3, 1, 2, 4, 6, 5]);
+
+      expect(tree.depth(2)).toBe(1);
+      expect(tree.depth(6)).toBe(1);
+      expect(tree.depth(1)).toBe(2);
+      expect(tree.depth(3)).toBe(2);
+      expect(tree.depth(5)).toBe(2);
+    });
+  });
 });

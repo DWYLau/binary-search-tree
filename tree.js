@@ -168,17 +168,17 @@ class Tree {
   }
 
   height(value) {
-    return this.findHeight(this.root, value);
+    return this.findNodeHeight(this.root, value);
   }
 
-  findHeight(node, value) {
+  findNodeHeight(node, value) {
     if (node === null) return node;
     let height = -1;
     let level = 0;
     const queue = [node];
     while (queue.length > 0) {
-      const n = queue.length;
-      for (let i = 0; i < n; i++) {
+      const nodes = queue.length; // number of nodes at current level
+      for (let i = 0; i < nodes; i++) {
         const current = queue.shift();
         if (current.value === value) height = level;
         if (current.left !== null) queue.push(current.left);
@@ -191,17 +191,17 @@ class Tree {
   }
 
   depth(value) {
-    return this.findDepth(this.root, value);
+    return this.findNodeDepth(this.root, value);
   }
 
-  findDepth(node, value) {
+  findNodeDepth(node, value) {
     if (node === null) return node;
     let depth = -1;
     let level = 0;
     const queue = [node];
     while (queue.length > 0) {
-      const n = queue.length;
-      for (let i = 0; i < n; i++) {
+      const nodes = queue.length; // number of nodes at current level
+      for (let i = 0; i < nodes; i++) {
         const current = queue.shift();
         if (current.value === value) depth = level;
         if (current.left !== null) queue.push(current.left);
@@ -210,6 +210,35 @@ class Tree {
       level++;
     }
     return depth;
+  }
+
+  isBalanced(root = this.root) {
+    return this.checkBalance(root);
+  }
+
+  findHeightRec(node) {
+    if (node === null) return -1;
+    const leftHeight = this.findHeightRec(node.left);
+    const rightHeight = this.findHeightRec(node.right);
+    return Math.max(leftHeight, rightHeight) + 1;
+  }
+
+  checkBalance(node) {
+    if (node === null) return true;
+    const leftHeight = this.findHeightRec(node.left);
+    const rightHeight = this.findHeightRec(node.right);
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return false;
+    }
+    return this.checkBalance(node.left) && this.checkBalance(node.right);
+  }
+
+  rebalance() {
+    const array = this.inorder();
+    const uniqueArray = [...new Set(array)];
+    const sortedArray = uniqueArray.sort((a, b) => a - b);
+    this.root = this.buildTree(sortedArray);
+    return this.root;
   }
 }
 

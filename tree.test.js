@@ -133,4 +133,52 @@ describe("#find", () => {
       expect(tree.depth(5)).toBe(2);
     });
   });
+
+  describe("#isBalanced", () => {
+    test("returns true if tree is balanced - height difference of 0", () => {
+      let tree = new Tree([3, 1, 2, 4, 6, 5]);
+
+      expect(tree.isBalanced()).toBe(true);
+    });
+
+    test("returns true if tree is balanced - height difference of 1", () => {
+      let tree = new Tree([3, 1, 2, 4, 6]);
+
+      expect(tree.isBalanced()).toBe(true);
+    });
+
+    test("returns false if tree is unbalanced - height difference of 2", () => {
+      let tree = new Tree();
+      tree.insert(1);
+      tree.insert(2);
+      tree.insert(3);
+
+      expect(tree.isBalanced()).toBe(false);
+    });
+  });
+
+  describe("#rebalance", () => {
+    test("returns balanced tree if tree is unbalanced", () => {
+      let tree = new Tree();
+      tree.insert(1);
+      tree.insert(2);
+      tree.insert(3);
+      tree.insert(4);
+      tree.rebalance();
+
+      expect(tree.root.value).toBe(3);
+    });
+
+    test("removes duplicate values", () => {
+      let tree = new Tree();
+      tree.insert(1);
+      tree.insert(2);
+      tree.insert(3);
+      tree.insert(4);
+      tree.insert(4);
+      tree.rebalance();
+
+      expect(tree.root.value).toBe(3);
+    });
+  });
 });

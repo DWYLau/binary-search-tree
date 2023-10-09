@@ -12,7 +12,3 @@ const prettyPrint = (node, prefix = "", isLeft = true) => {
     prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
   }
 };
-
-let tree = new Tree([3, 1, 2, 4, 6, 5]);
-prettyPrint(tree.root);
-console.log(tree.height(1));
